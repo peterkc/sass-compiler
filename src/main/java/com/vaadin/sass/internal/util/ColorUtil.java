@@ -574,6 +574,8 @@ public class ColorUtil {
         } else if (op == ColorOperation.Lighten) {
             hsl[2] = hsl[2] + amountByPercent;
             hsl[2] = hsl[2] > 100 ? 100 : hsl[2];
+        } else if (op == ColorOperation.AdjustHue) {
+            hsl[0] = hsl[0] + amountByPercent;
         }
         float alpha = getAlpha(color);
         return createHslaOrHslColor(hsl, alpha, color.getLineNumber(),
@@ -588,6 +590,10 @@ public class ColorUtil {
         return adjust(color, amount, ColorOperation.Lighten);
     }
 
+    public static LexicalUnitImpl adjustHue(LexicalUnitImpl color, float amount) {
+        return adjust(color, amount, ColorOperation.AdjustHue);
+    }
+
     private static float getAmountValue(ActualArgumentList params) {
         float amount = 10f;
         if (params.size() > 1) {
@@ -597,6 +603,6 @@ public class ColorUtil {
     }
 
     private enum ColorOperation {
-        Darken, Lighten
+        Darken, AdjustHue, Lighten
     }
 }
