@@ -962,10 +962,36 @@ void media() :
 void mediaDirective() :
 {}
 {
-  debuggingDirective() | LOOKAHEAD(2) styleRule() | skipUnknownRule() | contentDirective()
+  styleRuleOrDeclarationOrNestedProperties() | includeDirective() | contentDirective()
 }
 
 void mediaStatement(MediaListImpl ml) :
+{
+    List<SassListItem> seq;
+    List<SassListItem> list = new ArrayList<SassListItem>();
+}
+{
+  (seq = mediaSeq() { list.addAll(seq); } (< COMMA > ( <S> )* seq = mediaSeq() { list.addAll(seq); })* ( <S> )*)
+  {
+     ml.addAllItems(list);
+  } | plainMediaStatement(ml)
+}
+
+List<SassListItem> mediaSeq() :
+{
+  List<SassListItem> items = new ArrayList<SassListItem>();
+  Interpolation s;
+}
+{
+
+  (s = interpolation() {items.add(s);})
+  {
+    return items;
+  }
+
+}
+
+void plainMediaStatement(MediaListImpl ml) :
 {
   Token t;
 }
@@ -975,7 +1001,10 @@ void mediaStatement(MediaListImpl ml) :
       // loop over comma separated parts, add each to ml
       while ((t.kind != LBRACE) && (t.kind != EOF) && (t.kind != SEMICOLON)) {
         StringBuffer s = new StringBuffer();
-        s.append(getToken(0).image);
+        String image = getToken(0).image;
+        if (!image.equals("@media")) {
+            s.append(image);
+        }
         while ((t.kind != COMMA) && (t.kind != LBRACE) && (t.kind != EOF) && (t.kind != SEMICOLON)) {
 	      s.append(t.image);
 	      getNextToken();
@@ -1879,7 +1908,7 @@ Interpolation interpolation() :
     SassListItem expression;
 }
 {
-    n = < START_INTERPOLATION> { line = n.beginLine; column = n.beginColumn; } expression = expr() <RBRACE>
+    n = < START_INTERPOLATION> { line = n.beginLine; column = n.beginColumn; } expression = expressionList() <RBRACE>
     {
         return new Interpolation(expression, line, column);
     }

@@ -24,6 +24,8 @@
 package com.vaadin.sass.internal.parser;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.css.sac.SACMediaList;
 
@@ -37,39 +39,49 @@ public class MediaListImpl implements SACMediaList, Serializable {
      * 
      */
     private static final long serialVersionUID = 1L;
-    String[] array = new String[10];
-    int current;
+    private List<SassListItem> items = new ArrayList<SassListItem>();
+
+    public List<SassListItem> getSassListItems() {
+        return items;
+    }
+
+    public SassListItem getSassListItem(int index) {
+        if ((index < 0) || (index >= getLength())) {
+            return null;
+        }
+        return items.get(index);
+    }
 
     @Override
     public int getLength() {
-        return current;
+        return items.size();
     }
 
     @Override
     public String item(int index) {
-        if ((index < 0) || (index >= current)) {
+        if ((index < 0) || (index >= getLength())) {
             return null;
         }
-        return array[index];
+        return items.get(index).toString();
     }
 
-    void addItem(String medium) {
+    public void addItem(String medium) {
         if (medium.equals("all")) {
-            array[0] = "all";
-            current = 1;
-            return;
+            items.clear();
         }
-        for (int i = 0; i < current; i++) {
-            if (medium.equals(array[i])) {
-                return;
-            }
+        addItem(new StringItem(medium));
+    }
+
+    public void addAllItems(Iterable<SassListItem> items) {
+        for (SassListItem item : items) {
+            addItem(item);
         }
-        if (current == array.length) {
-            String[] old = array;
-            array = new String[current + current];
-            System.arraycopy(old, 0, array, 0, current);
+    }
+
+    public void addItem(SassListItem item) {
+        if (!items.contains(item)) {
+            items.add(item);
         }
-        array[current++] = medium;
     }
 
     /**
@@ -77,24 +89,23 @@ public class MediaListImpl implements SACMediaList, Serializable {
      */
     @Override
     public String toString() {
-        switch (current) {
+        switch (items.size()) {
         case 0:
             return "";
         case 1:
-            return array[0];
+            return items.get(0).toString();
         default:
-            boolean not_done = true;
-            int i = 0;
-            StringBuffer buf = new StringBuffer(50);
-            do {
-                buf.append(array[i++]);
-                if (i == current) {
-                    not_done = false;
+            boolean first = true;
+            StringBuilder buffer = new StringBuilder(50);
+            for (SassListItem item : items) {
+                if (first) {
+                    first = false;
                 } else {
-                    buf.append(", ");
+                    buffer.append(", ");
                 }
-            } while (not_done);
-            return buf.toString();
+                buffer.append(item.toString());
+            }
+            return buffer.toString();
         }
     }
 }

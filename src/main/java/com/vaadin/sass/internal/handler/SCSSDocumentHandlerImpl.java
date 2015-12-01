@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.vaadin.sass.internal.parser.MediaListImpl;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.LexicalUnit;
@@ -168,7 +169,7 @@ public class SCSSDocumentHandlerImpl implements SCSSDocumentHandler {
 
     @Override
     public void startMedia(SACMediaList media) throws CSSException {
-        MediaNode node = new MediaNode(media);
+        MediaNode node = new MediaNode((MediaListImpl)media);
         nodeStack.peek().appendChild(node);
         nodeStack.push(node);
     }

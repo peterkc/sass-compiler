@@ -16,6 +16,8 @@
 package com.vaadin.sass.internal.parser;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
@@ -130,13 +132,47 @@ public class Interpolation implements SassListItem, Serializable {
      * @return The value of the evaluated expression, a SassListItem.
      */
     public SassListItem replaceInterpolation() {
-        if (expression instanceof LexicalUnitImpl) {
+        if (expression instanceof SassList) {
+            List<LexicalUnitImpl> flatItems = new ArrayList<LexicalUnitImpl>();
+            if (collectLexicalItems((SassList)expression, flatItems)) {
+                StringBuilder buffer = new StringBuilder();
+                boolean first = true;
+                for (LexicalUnitImpl lexicalUnit : flatItems) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        buffer.append(", ");
+                    }
+                    buffer.append(lexicalUnit.unquotedString());
+                }
+                return new LexicalUnitImpl(getLineNumber(), getLineNumber(),
+                        LexicalUnitImpl.SAC_IDENT, buffer.toString());
+
+            } else {
+                return expression;
+            }
+        } else if (expression instanceof LexicalUnitImpl) {
             String unquotedString = expression.unquotedString();
             return new LexicalUnitImpl(getLineNumber(), getLineNumber(),
                     LexicalUnitImpl.SAC_IDENT, unquotedString);
         } else {
             return expression;
         }
+    }
+
+    private boolean collectLexicalItems(SassList list, List<LexicalUnitImpl> result) {
+        for (SassListItem sassListItem : list) {
+            if ((sassListItem instanceof LexicalUnitImpl)) {
+                result.add((LexicalUnitImpl)sassListItem);
+            } else if (sassListItem instanceof SassList) {
+                if (!collectLexicalItems((SassList)sassListItem, result)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

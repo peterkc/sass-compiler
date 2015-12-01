@@ -24,6 +24,7 @@ import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.ScssStylesheet;
 import com.vaadin.sass.internal.selector.Selector;
 import com.vaadin.sass.internal.tree.BlockNode;
+import com.vaadin.sass.internal.tree.MediaNode;
 import com.vaadin.sass.internal.tree.Node;
 
 /**
@@ -64,6 +65,10 @@ public class BlockNodeHandler {
                     if (child instanceof BlockNode) {
                         ((BlockNode) child).setParentSelectors(node
                                 .getSelectorList());
+                        result.addAll(child.traverse(context));
+                    } else if (child instanceof MediaNode) {
+                        BlockNode mediaParentNode = new BlockNode(node.getSelectorList());
+                        ((MediaNode)child).wrapInBlockNode(mediaParentNode);
                         result.addAll(child.traverse(context));
                     } else {
                         Collection<Node> childTraversed = child

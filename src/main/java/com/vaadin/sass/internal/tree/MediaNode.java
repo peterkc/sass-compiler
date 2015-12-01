@@ -16,19 +16,18 @@
 
 package com.vaadin.sass.internal.tree;
 
-import java.util.Collection;
-import java.util.Collections;
-
+import com.vaadin.sass.internal.ScssContext;
+import com.vaadin.sass.internal.parser.*;
 import org.w3c.css.sac.SACMediaList;
 
-import com.vaadin.sass.internal.ScssContext;
+import java.util.*;
 
-public class MediaNode extends Node {
+public class MediaNode extends Node implements IVariableNode {
     private static final long serialVersionUID = 2502097081457509523L;
 
-    SACMediaList media;
+    MediaListImpl media;
 
-    public MediaNode(SACMediaList media) {
+    public MediaNode(MediaListImpl media) {
         super();
         this.media = media;
     }
@@ -42,7 +41,7 @@ public class MediaNode extends Node {
         return media;
     }
 
-    public void setMedia(SACMediaList media) {
+    public void setMedia(MediaListImpl media) {
         this.media = media;
     }
 
@@ -58,6 +57,7 @@ public class MediaNode extends Node {
 
     @Override
     public Collection<Node> traverse(ScssContext context) {
+        replaceVariables(context);
         traverseChildren(context);
         return Collections.singleton((Node) this);
     }
@@ -69,7 +69,7 @@ public class MediaNode extends Node {
                 if (i > 0) {
                     builder.append(", ");
                 }
-                builder.append(media.item(i));
+                builder.append(media.getSassListItem(i).buildString(strategy));
             }
         }
         builder.append(" {\n");
@@ -89,6 +89,25 @@ public class MediaNode extends Node {
         }
         builder.append("}");
         return builder.toString();
+    }
+
+    public void wrapInBlockNode(BlockNode blockNode) {
+        for (Node child : new ArrayList<Node>(getChildren())) {
+            blockNode.appendChild(child);
+        }
+        appendChild(blockNode);
+    }
+
+    @Override
+    public void replaceVariables(ScssContext context) {
+
+        MediaListImpl newMedia = new MediaListImpl();
+        for (SassListItem sassListItem : media.getSassListItems()) {
+            StringInterpolationSequence interpolationSequence = new StringInterpolationSequence(Collections.singletonList(sassListItem));
+            StringInterpolationSequence replacedSequence = interpolationSequence.replaceVariables(context);
+            newMedia.addAllItems(replacedSequence.getItems());
+        }
+        media = newMedia;
     }
 
     @Override
