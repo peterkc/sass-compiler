@@ -16,8 +16,6 @@
 package com.vaadin.sass.internal.parser;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
@@ -133,18 +131,8 @@ public class Interpolation implements SassListItem, Serializable {
      */
     public SassListItem replaceInterpolation() {
         if (expression instanceof SassList) {
-            List<LexicalUnitImpl> flatItems = new ArrayList<LexicalUnitImpl>();
-            if (collectLexicalItems((SassList)expression, flatItems)) {
-                StringBuilder buffer = new StringBuilder();
-                boolean first = true;
-                for (LexicalUnitImpl lexicalUnit : flatItems) {
-                    if (first) {
-                        first = false;
-                    } else {
-                        buffer.append(", ");
-                    }
-                    buffer.append(lexicalUnit.unquotedString());
-                }
+            StringBuilder buffer = new StringBuilder();
+            if (appendLexicalItems((SassList)expression, buffer)) {
                 return new LexicalUnitImpl(getLineNumber(), getLineNumber(),
                         LexicalUnitImpl.SAC_IDENT, buffer.toString());
 
@@ -160,12 +148,18 @@ public class Interpolation implements SassListItem, Serializable {
         }
     }
 
-    private boolean collectLexicalItems(SassList list, List<LexicalUnitImpl> result) {
+    private boolean appendLexicalItems(SassList list, StringBuilder buffer) {
+        boolean first = true;
         for (SassListItem sassListItem : list) {
+            if (first) {
+                first = false;
+            } else {
+                buffer.append(list.getSeparator());
+            }
             if ((sassListItem instanceof LexicalUnitImpl)) {
-                result.add((LexicalUnitImpl)sassListItem);
+                buffer.append(((LexicalUnitImpl)sassListItem).unquotedString());
             } else if (sassListItem instanceof SassList) {
-                if (!collectLexicalItems((SassList)sassListItem, result)) {
+                if (!appendLexicalItems((SassList)sassListItem, buffer)) {
                     return false;
                 }
             } else {
