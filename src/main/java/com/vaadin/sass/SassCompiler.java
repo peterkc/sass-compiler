@@ -153,9 +153,8 @@ public class SassCompiler {
             throws IOException {
         if (filename == null) {
             return new OutputStreamWriter(System.out, "UTF-8");
-        } else {
+        } 
             File file = new File(filename);
             return new FileWriter(file);
-        }
     }
 }

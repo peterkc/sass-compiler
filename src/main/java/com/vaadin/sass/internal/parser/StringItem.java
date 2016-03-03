@@ -28,7 +28,11 @@ import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
  * 
  */
 public class StringItem implements SassListItem, Serializable {
-    String value;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String value;
 
     public StringItem(String s) {
         value = s;
@@ -66,9 +70,8 @@ public class StringItem implements SassListItem, Serializable {
                 stringValue = var.replaceInterpolation(stringValue);
             }
             return new StringItem(stringValue);
-        } else {
+        } 
             return this;
-        }
     }
 
     @Override

@@ -208,9 +208,8 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         int i = (int) f;
         if (i == f) {
             return Integer.toString(i);
-        } else {
+        } 
             return CSS_FLOAT_FORMAT.format(f);
-        }
     }
 
     private void setFloatValue(float f) {
@@ -318,9 +317,8 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         if (result == null) {
             return "Lexical unit node [" + buildString(Node.TO_STRING_STRATEGY)
                     + "]";
-        } else {
+        } 
             return result;
-        }
     }
 
     // A helper method for sass interpolation
@@ -443,9 +441,8 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         int i = (int) v;
         if (v == i) {
             return new LexicalUnitImpl(line, column, SAC_INTEGER, i);
-        } else {
+        } 
             return new LexicalUnitImpl(line, column, SAC_REAL, v);
-        }
     }
 
     public static LexicalUnitImpl createInteger(int line, int column, int i) {
@@ -718,9 +715,8 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
             LexicalUnitImpl copy = copy();
             copy.setParameterList(params.replaceVariables(context));
             return copy;
-        } else {
-            return this;
         }
+            return this;
     }
 
     private SassListItem replaceSimpleVariable(ScssContext context) {
@@ -796,9 +792,8 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
                 generator = DEFAULT_SERIALIZER;
             }
             return generator.compute(context, copy);
-        } else {
+        } 
             return this;
-        }
     }
 
     private SassListItem replaceCustomFunctions(ScssContext context) {

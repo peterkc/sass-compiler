@@ -43,9 +43,8 @@ public abstract class ListFunctionGenerator extends AbstractFunctionGenerator {
     protected SassList.Separator getAutoSeparator(SassList firstList) {
         if (firstList.size() > 1) {
             return firstList.getSeparator();
-        } else {
-            return SassList.Separator.SPACE;
         }
+		return SassList.Separator.SPACE;
     }
 
     protected Separator getSeparator(SassListItem separatorItem) {

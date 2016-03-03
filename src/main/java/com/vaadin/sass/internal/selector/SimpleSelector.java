@@ -32,7 +32,12 @@ import com.vaadin.sass.internal.ScssContext;
  */
 public abstract class SimpleSelector implements Serializable {
 
-    public SimpleSelector replaceVariables(ScssContext context) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SimpleSelector replaceVariables(ScssContext context) {
         return this;
     }
 

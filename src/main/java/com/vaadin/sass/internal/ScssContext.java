@@ -39,7 +39,7 @@ public class ScssContext {
      */
     public enum UrlMode {
         ABSOLUTE, MIXED, RELATIVE
-    };
+    }
 
     private UrlMode urlMode;
 

@@ -24,7 +24,11 @@ import com.vaadin.sass.internal.parser.SassListItem;
 public class ReturnNode extends Node implements IVariableNode,
         NodeWithUrlContent {
 
-    private SassListItem expr;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private SassListItem expr;
 
     public ReturnNode(SassListItem expression) {
         expr = expression;

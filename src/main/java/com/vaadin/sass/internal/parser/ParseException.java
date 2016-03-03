@@ -256,9 +256,7 @@ public class ParseException extends CSSException {
         }
         if (fileName != null) {
             return ", in file " + fileName;
-        } else {
+        } 
             return "";
-        }
     }
-
 }

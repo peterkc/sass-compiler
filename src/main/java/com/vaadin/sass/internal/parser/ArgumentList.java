@@ -31,7 +31,8 @@ import com.vaadin.sass.internal.tree.Node;
  * parameters of an @include or a function call.
  */
 public class ArgumentList extends SassList implements Serializable {
-    private List<Variable> namedVariables = new ArrayList<Variable>();
+	private static final long serialVersionUID = 1L;
+	private List<Variable> namedVariables = new ArrayList<Variable>();
 
     public ArgumentList(SassList list) {
         super(list.getSeparator(), list.getItems());

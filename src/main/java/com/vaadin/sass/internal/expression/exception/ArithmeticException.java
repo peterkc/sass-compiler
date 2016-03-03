@@ -18,7 +18,12 @@ package com.vaadin.sass.internal.expression.exception;
 import com.vaadin.sass.internal.parser.SassListItem;
 
 public class ArithmeticException extends RuntimeException {
-    public ArithmeticException(String errorMsg) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ArithmeticException(String errorMsg) {
         super(errorMsg);
     }
 

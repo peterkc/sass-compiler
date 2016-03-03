@@ -21,7 +21,12 @@ import org.w3c.css.sac.InputSource;
 
 public class ClassloaderResolver extends AbstractResolver {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public InputSource resolveNormalized(String identifier) {
         String fileName = identifier;
         if (!fileName.endsWith(".css")) {
@@ -43,9 +48,8 @@ public class ClassloaderResolver extends AbstractResolver {
             source.setURI(fileName);
             return source;
 
-        } else {
-            return null;
         }
+		return null;
 
     }
 

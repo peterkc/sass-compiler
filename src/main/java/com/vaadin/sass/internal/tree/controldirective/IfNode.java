@@ -24,7 +24,11 @@ import com.vaadin.sass.internal.tree.IVariableNode;
 import com.vaadin.sass.internal.tree.Node;
 
 public class IfNode extends Node implements IfElseNode, IVariableNode {
-    private SassListItem expression;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private SassListItem expression;
 
     public IfNode(SassListItem expression) {
         if (expression == null) {

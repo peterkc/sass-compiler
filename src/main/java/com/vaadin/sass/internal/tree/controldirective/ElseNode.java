@@ -23,7 +23,12 @@ import com.vaadin.sass.internal.tree.Node;
 
 public class ElseNode extends Node implements IfElseNode {
 
-    public ElseNode() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ElseNode() {
     }
 
     public ElseNode(ElseNode nodeToCopy) {

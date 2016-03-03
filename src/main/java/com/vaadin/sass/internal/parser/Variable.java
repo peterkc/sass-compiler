@@ -28,7 +28,11 @@ import com.vaadin.sass.internal.Definition;
  */
 public class Variable implements Definition, Serializable {
 
-    private final String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String name;
     private SassListItem expr = null;
     private final boolean guarded;
 
@@ -71,9 +75,8 @@ public class Variable implements Definition, Serializable {
         final String interpolation = "#{$" + getName() + "}";
         if (s.contains(interpolation)) {
             return s.replace(interpolation, getExpr().unquotedString());
-        } else {
+        } 
             return s;
-        }
     }
 
 }

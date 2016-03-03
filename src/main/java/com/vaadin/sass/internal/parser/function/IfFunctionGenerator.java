@@ -65,9 +65,8 @@ public class IfFunctionGenerator implements SCSSFunctionGenerator {
         if (BinaryOperator.isTrue(firstParam)) {
             return AbstractFunctionGenerator.getParam(actualArguments,
                     "if-true").evaluateFunctionsAndExpressions(context, true);
-        } else {
-            return AbstractFunctionGenerator.getParam(actualArguments,
-                    "if-false").evaluateFunctionsAndExpressions(context, true);
         }
+		return AbstractFunctionGenerator.getParam(actualArguments,
+		        "if-false").evaluateFunctionsAndExpressions(context, true);
     }
 }

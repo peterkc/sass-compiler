@@ -25,7 +25,11 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  */
 public class PseudoElementSelector extends SimpleSelector {
 
-    private StringInterpolationSequence pseudoElement;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private StringInterpolationSequence pseudoElement;
 
     public PseudoElementSelector(StringInterpolationSequence pseudoElement) {
         this.pseudoElement = pseudoElement;

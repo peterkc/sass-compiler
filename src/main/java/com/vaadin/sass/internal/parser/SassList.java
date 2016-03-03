@@ -33,7 +33,12 @@ import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
 public class SassList implements SassListItem, Iterable<SassListItem>,
         Serializable {
 
-    public enum Separator {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public enum Separator {
         COMMA(", "), SPACE(" ");
         private String separator;
 
@@ -169,16 +174,14 @@ public class SassList implements SassListItem, Iterable<SassListItem>,
             SassList sassList = (SassList) item;
             if (sassList.size() == 1) {
                 return flatten(sassList.get(0));
-            } else {
+            } 
                 List<SassListItem> list = new ArrayList<SassListItem>();
                 for (SassListItem inner : sassList) {
                     list.add(flatten(inner));
                 }
                 return new SassList(sassList.getSeparator(), list);
-            }
-        } else {
+        } 
             return item;
-        }
     }
 
     @Override
@@ -271,9 +274,8 @@ public class SassList implements SassListItem, Iterable<SassListItem>,
             SassList result = new SassList(getSeparator(), newItems);
             result.setSourcePosition(getLineNumber(), getColumnNumber());
             return result;
-        } else {
+        } 
             return this;
-        }
     }
 
     @Override

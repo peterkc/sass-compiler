@@ -25,7 +25,11 @@ import com.vaadin.sass.internal.parser.Variable;
  * See also {@link SimpleSelectorSequence} and {@link Selector}.
  */
 public class PseudoClassSelector extends SimpleSelector {
-    private StringInterpolationSequence pseudoClass;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private StringInterpolationSequence pseudoClass;
     private String argument = null;
 
     public PseudoClassSelector(StringInterpolationSequence pseudoClass) {
@@ -46,9 +50,8 @@ public class PseudoClassSelector extends SimpleSelector {
     public String toString() {
         if (argument == null) {
             return ":" + getClassValue();
-        } else {
-            return ":" + getClassValue() + "(" + argument + ")";
         }
+		return ":" + getClassValue() + "(" + argument + ")";
     }
 
     @Override
@@ -56,11 +59,10 @@ public class PseudoClassSelector extends SimpleSelector {
         if (argument == null) {
             return new PseudoClassSelector(
                     pseudoClass.replaceVariables(context));
-        } else {
-            return new PseudoClassSelector(
-                    pseudoClass.replaceVariables(context),
-                    replaceInterpolation(context, argument));
         }
+		return new PseudoClassSelector(
+		        pseudoClass.replaceVariables(context),
+		        replaceInterpolation(context, argument));
     }
 
     private String replaceInterpolation(ScssContext context, String value) {

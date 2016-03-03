@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.handler.SCSSErrorHandler;
@@ -29,9 +27,12 @@ import com.vaadin.sass.internal.selector.Selector;
 import com.vaadin.sass.internal.visitor.ExtendNodeHandler;
 
 public class ExtendNode extends Node implements IVariableNode {
-    private static final long serialVersionUID = 3301805078983796878L;
 
-    private List<Selector> list;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Selector> list;
     private boolean optional;
 
     public ExtendNode(List<Selector> list, boolean optional) {

@@ -25,7 +25,11 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  */
 public class UniversalSelector extends TypeSelector {
 
-    public static final UniversalSelector it = new UniversalSelector();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final UniversalSelector it = new UniversalSelector();
 
     private UniversalSelector() {
         super(new StringInterpolationSequence("*"));

@@ -35,7 +35,8 @@ import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
  * 
  */
 public class ActualArgumentList implements Serializable {
-    private ArgumentList arglist;
+	private static final long serialVersionUID = 1L;
+	private ArgumentList arglist;
     // variableArgument is not duplicated in arglist and can be null. A variable
     // argument is always unnamed in an actual argument list.
     private SassListItem variableArgument = null;

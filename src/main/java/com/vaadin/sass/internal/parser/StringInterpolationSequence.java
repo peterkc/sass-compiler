@@ -35,7 +35,11 @@ import com.vaadin.sass.internal.ScssContext;
  * 
  */
 public class StringInterpolationSequence implements Serializable {
-    private boolean containsInterpolation = false;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean containsInterpolation = false;
     private SassList items;
     private String toString;
 

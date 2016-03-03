@@ -32,7 +32,11 @@ import com.vaadin.sass.internal.util.StringUtil;
  */
 public class SimpleNode extends Node implements IVariableNode {
 
-    private String text;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String text;
 
     public SimpleNode(String text) {
         this.text = text;

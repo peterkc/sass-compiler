@@ -22,7 +22,11 @@ import java.util.Collections;
 import com.vaadin.sass.internal.ScssContext;
 
 public class CommentNode extends Node {
-    private final String comment;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String comment;
 
     public CommentNode(String comment) {
         this.comment = comment;

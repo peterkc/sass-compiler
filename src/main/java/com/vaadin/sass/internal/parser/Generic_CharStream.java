@@ -116,8 +116,8 @@ public final class Generic_CharStream implements CharStream {
                     - maxNextCharInd)) == -1) {
                 reader.close();
                 throw new java.io.IOException();
-            } else
-                maxNextCharInd += i;
+            }
+            maxNextCharInd += i;
             return;
         } catch (java.io.IOException e) {
             --bufpos;
@@ -267,8 +267,8 @@ public final class Generic_CharStream implements CharStream {
     public final String GetImage() {
         if (bufpos >= tokenBegin)
             return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
-        else
-            return new String(buffer, tokenBegin, bufsize - tokenBegin)
+
+        return new String(buffer, tokenBegin, bufsize - tokenBegin)
                     + new String(buffer, 0, bufpos + 1);
     }
 

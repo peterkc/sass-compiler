@@ -25,7 +25,11 @@ import com.vaadin.sass.internal.visitor.ForNodeHandler;
 
 public class ForNode extends Node {
 
-    private final String variableName;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String variableName;
     private final SassListItem from;
     private final SassListItem to;
     private final boolean exclusive;

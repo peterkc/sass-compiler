@@ -28,7 +28,11 @@ import com.vaadin.sass.internal.util.StringUtil;
 
 public class MicrosoftRuleNode extends Node implements IVariableNode {
 
-    private final String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String name;
     private StringInterpolationSequence value;
 
     public MicrosoftRuleNode(String name, StringInterpolationSequence value) {

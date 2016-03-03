@@ -37,7 +37,8 @@ import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
  * 
  */
 public class Interpolation implements SassListItem, Serializable {
-    private int lineNumber;
+	private static final long serialVersionUID = 1L;
+	private int lineNumber;
     private int columnNumber;
     private SassListItem expression;
     private boolean evaluateArithmetics;
@@ -143,9 +144,8 @@ public class Interpolation implements SassListItem, Serializable {
             String unquotedString = expression.unquotedString();
             return new LexicalUnitImpl(getLineNumber(), getLineNumber(),
                     LexicalUnitImpl.SAC_IDENT, unquotedString);
-        } else {
+        } 
             return expression;
-        }
     }
 
     private boolean appendLexicalItems(SassList list, StringBuilder buffer) {

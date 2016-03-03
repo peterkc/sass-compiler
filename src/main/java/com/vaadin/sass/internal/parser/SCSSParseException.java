@@ -16,7 +16,11 @@
 package com.vaadin.sass.internal.parser;
 
 public class SCSSParseException extends ParseException {
-    private ParseException parseException;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ParseException parseException;
     private String fileName;
 
     public SCSSParseException(ParseException parseException, String fileName) {

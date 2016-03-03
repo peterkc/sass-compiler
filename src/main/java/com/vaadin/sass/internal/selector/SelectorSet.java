@@ -20,7 +20,12 @@ import java.util.LinkedHashSet;
 
 public class SelectorSet extends LinkedHashSet<Selector> {
 
-    public SelectorSet() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SelectorSet() {
         super();
     }
 

@@ -43,7 +43,11 @@ public class Selector implements Serializable {
      * elimination (see https://github.com/nex3/sass/issues/324).
      */
 
-    private List<SelectorSegment> parts = new ArrayList<SelectorSegment>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<SelectorSegment> parts = new ArrayList<SelectorSegment>();
 
     private Selector() {
         /*
@@ -124,9 +128,8 @@ public class Selector implements Serializable {
     private Selector tail() {
         if (parts.size() > 2) {
             return new Selector(parts.subList(2, parts.size()));
-        } else {
-            return null;
         }
+		return null;
     }
 
     /**

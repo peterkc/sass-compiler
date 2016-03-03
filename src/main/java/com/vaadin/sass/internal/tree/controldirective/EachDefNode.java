@@ -48,9 +48,8 @@ public class EachDefNode extends Node implements IVariableNode,
     public SassList getVariables() {
         if (list instanceof SassList) {
             return (SassList) list;
-        } else {
-            return new SassList(list);
         }
+		return new SassList(list);
     }
 
     public String getVariableName() {

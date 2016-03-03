@@ -141,7 +141,6 @@ public interface SassListItem {
 
     // TODO this should be replaced with a more appropriate API for performing
     // the operations that we actually want to perform
-    @Deprecated
     public LexicalUnitImpl getContainedValue();
 
 }

@@ -16,7 +16,12 @@
 package com.vaadin.sass.internal.expression.exception;
 
 public class IncompatibleUnitsException extends ArithmeticException {
-    public IncompatibleUnitsException(String errorExpr) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public IncompatibleUnitsException(String errorExpr) {
         super(getErrorMsg(errorExpr));
     }
 

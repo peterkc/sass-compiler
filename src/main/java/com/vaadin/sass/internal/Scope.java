@@ -141,9 +141,8 @@ public class Scope {
             if (definitions != null) {
                 return getDefinitions(false).keySet().toString()
                         + ", parent = " + parent;
-            } else {
-                return "{}, parent = " + parent;
             }
+                return "{}, parent = " + parent;
         }
 
         private Map<String, T> getDefinitions(boolean create) {
@@ -152,11 +151,9 @@ public class Scope {
             }
             if (definitions != null) {
                 return definitions;
-            } else {
+            } 
                 return Collections.emptyMap();
-            }
         }
-
     }
 
     private Scope parent;

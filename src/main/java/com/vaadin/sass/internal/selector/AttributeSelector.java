@@ -25,7 +25,12 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  */
 public class AttributeSelector extends SimpleSelector {
 
-    public enum MatchRelation {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public enum MatchRelation {
         EQUALS("="), INCLUDES("~="), DASHMATCH("|="), PREFIXMATCH("^="), SUFFIXMATCH(
                 "$="), SUBSTRINGMATCH("*=");
 
@@ -80,9 +85,8 @@ public class AttributeSelector extends SimpleSelector {
     public String toString() {
         if (getValue() == null) {
             return "[" + getAttribute() + "]";
-        } else {
-            return "[" + getAttribute() + getMatchRelation() + getValue() + "]";
         }
+		return "[" + getAttribute() + getMatchRelation() + getValue() + "]";
     }
 
     @Override

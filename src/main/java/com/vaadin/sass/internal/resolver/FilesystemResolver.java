@@ -26,7 +26,11 @@ import com.vaadin.sass.internal.ScssStylesheet;
 
 public class FilesystemResolver extends AbstractResolver {
 
-    private String[] customPaths = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String[] customPaths = null;
 
     public FilesystemResolver(String... customPaths) {
         this.customPaths = customPaths;

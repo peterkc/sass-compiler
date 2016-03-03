@@ -39,7 +39,11 @@ import com.vaadin.sass.internal.tree.Node.BuildStringStrategy;
  */
 public class SassExpression implements SassListItem, Serializable {
 
-    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
     private static final Pattern INTERPOLATION_PATTERN = Pattern
             .compile(".*#[{][$][^\\s]+[}].*");
     private List<SassListItem> items;
@@ -104,9 +108,8 @@ public class SassExpression implements SassListItem, Serializable {
         }
         if (items.size() == 1) {
             return items.get(0);
-        } else {
-            return new SassExpression(items);
         }
+		return new SassExpression(items);
     }
 
     @Override
@@ -216,9 +219,8 @@ public class SassExpression implements SassListItem, Serializable {
         }
         if (list.size() == 0 || !evaluateArithmetics) {
             return new SassExpression(list);
-        } else {
-            return ArithmeticExpressionEvaluator.get().evaluate(context, list);
         }
+		return ArithmeticExpressionEvaluator.get().evaluate(context, list);
     }
 
     @Override

@@ -39,23 +39,20 @@ public class QuoteUnquoteFunctionGenerator extends
         if ("quote".equals(functionName)) {
             if (isQuoted(result)) {
                 return firstParam;
-            } else {
-                return LexicalUnitImpl.createString(firstParam.getLineNumber(),
-                        firstParam.getColumnNumber(), result);
             }
-        } else {
-            result = unquote(result);
-            return LexicalUnitImpl.createIdent(firstParam.getLineNumber(),
-                    firstParam.getColumnNumber(), result);
+			return LexicalUnitImpl.createString(firstParam.getLineNumber(),
+			        firstParam.getColumnNumber(), result);
         }
+		result = unquote(result);
+		return LexicalUnitImpl.createIdent(firstParam.getLineNumber(),
+		        firstParam.getColumnNumber(), result);
     }
 
     private String unquote(String string) {
         if (!isQuoted(string)) {
             return string;
-        } else {
-            return string.substring(1, string.length() - 1);
         }
+		return string.substring(1, string.length() - 1);
     }
 
     private boolean isQuoted(String string) {

@@ -23,7 +23,11 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  * output as-is but only when used via "@extend".
  */
 public class PlaceholderSelector extends SimpleSelector {
-    private StringInterpolationSequence value;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private StringInterpolationSequence value;
 
     public PlaceholderSelector(StringInterpolationSequence value) {
         this.value = value;

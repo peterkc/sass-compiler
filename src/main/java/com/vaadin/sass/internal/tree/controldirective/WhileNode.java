@@ -25,7 +25,11 @@ import com.vaadin.sass.internal.visitor.WhileNodeHandler;
 
 public class WhileNode extends Node {
 
-    private SassListItem condition;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private SassListItem condition;
 
     public WhileNode(SassListItem condition) {
         this.condition = condition;

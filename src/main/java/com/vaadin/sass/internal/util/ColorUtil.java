@@ -199,30 +199,32 @@ public class ColorUtil {
      */
     public static int[] colorToRgb(LexicalUnitImpl color) {
         if (isRgba(color)) {
-            if (color.getParameterList().size() == 2
-                    && color.getParameterList().get(0) instanceof LexicalUnitImpl) {
-                return colorToRgb((LexicalUnitImpl) color.getParameterList()
-                        .get(0));
-            } else {
-                int red = color.getParameterList().get(0).getContainedValue()
-                        .getIntegerValue();
-                int green = color.getParameterList().get(1).getContainedValue()
-                        .getIntegerValue();
-                int blue = color.getParameterList().get(2).getContainedValue()
-                        .getIntegerValue();
-                return new int[] { red, green, blue };
-            }
-        } else if (isHsla(color)) {
-            return hslToRgb(color);
-        } else if (isHexColor(color)) {
-            return hexColorToRgb(color);
-        } else if (isHslColor(color)) {
-            return hslToRgb(color);
-        } else if (isRgbFunction(color)) {
-            return rgbFunctionToRgb(color);
-        } else if (isColorName(color)) {
-            return colorNameToRgb(color);
+
+            if (color.getParameterList().size() == 2 && color.getParameterList().get(0) instanceof LexicalUnitImpl)
+                return colorToRgb((LexicalUnitImpl) color.getParameterList() .get(0));
+
+            int red = color.getParameterList().get(0).getContainedValue().getIntegerValue();
+            int green = color.getParameterList().get(1).getContainedValue().getIntegerValue();
+            int blue = color.getParameterList().get(2).getContainedValue().getIntegerValue();
+
+            return new int[] { red, green, blue };
         }
+
+        if (isHsla(color))
+            return hslToRgb(color);
+
+        if (isHexColor(color))
+            return hexColorToRgb(color);
+
+        if (isHslColor(color))
+            return hslToRgb(color);
+
+        if (isRgbFunction(color))
+            return rgbFunctionToRgb(color);
+
+        if (isColorName(color))
+            return colorNameToRgb(color);
+
         return null;
     }
 

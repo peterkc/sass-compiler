@@ -60,15 +60,13 @@ public class ColorComponentFunctionGenerator extends AbstractFunctionGenerator {
             if (componentNumber == 0) {
                 return LexicalUnitImpl.createDEG(color.getLineNumber(),
                         color.getColumnNumber(), components[componentNumber]);
-            } else {
-                return LexicalUnitImpl.createPercentage(color.getLineNumber(),
-                        color.getColumnNumber(), components[componentNumber]);
             }
-        } else {
-            int[] components = ColorUtil.colorToRgb(color);
-            return LexicalUnitImpl.createInteger(color.getLineNumber(),
-                    color.getColumnNumber(), components[componentNumber]);
+			return LexicalUnitImpl.createPercentage(color.getLineNumber(),
+			        color.getColumnNumber(), components[componentNumber]);
         }
+		int[] components = ColorUtil.colorToRgb(color);
+		return LexicalUnitImpl.createInteger(color.getLineNumber(),
+		        color.getColumnNumber(), components[componentNumber]);
     }
 
     private void checkParameters(LexicalUnitImpl function,

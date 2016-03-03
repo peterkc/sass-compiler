@@ -25,7 +25,11 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  */
 public class ClassSelector extends SimpleSelector {
 
-    private StringInterpolationSequence classValue;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private StringInterpolationSequence classValue;
 
     public ClassSelector(StringInterpolationSequence classValue) {
         this.classValue = classValue;

@@ -128,7 +128,6 @@ public abstract class Node implements Serializable {
     }
 
     // avoid calling this method whenever possible
-    @Deprecated
     protected void setChildren(Collection<Node> newChildren) {
         children = new ArrayList<Node>(newChildren);
         // add new children
@@ -143,9 +142,8 @@ public abstract class Node implements Serializable {
         }
         if (children != null) {
             return children;
-        } else {
-            return Collections.emptyList();
         }
+		return Collections.emptyList();
     }
 
     /**
@@ -235,9 +233,8 @@ public abstract class Node implements Serializable {
                     context.closeVariableScope();
                 }
             }
-        } else {
-            return Collections.emptyList();
         }
+		return Collections.emptyList();
     }
 
     public static interface BuildStringStrategy {

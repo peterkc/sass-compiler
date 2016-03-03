@@ -24,7 +24,11 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  * See also {@link SimpleSelectorSequence} and {@link Selector}.
  */
 public class TypeSelector extends SimpleSelector {
-    private StringInterpolationSequence localName;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private StringInterpolationSequence localName;
 
     public TypeSelector(StringInterpolationSequence value) {
         localName = value;

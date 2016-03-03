@@ -60,11 +60,10 @@ public class TransparencyModificationFunctionGenerator extends
             return ColorUtil.createHslaOrHslColor(ColorUtil.colorToHsl(color),
                     opacity, function.getLineNumber(),
                     function.getColumnNumber());
-        } else {
-            return ColorUtil.createRgbaOrHexColor(ColorUtil.colorToRgb(color),
-                    opacity, function.getLineNumber(),
-                    function.getColumnNumber());
         }
+		return ColorUtil.createRgbaOrHexColor(ColorUtil.colorToRgb(color),
+		        opacity, function.getLineNumber(),
+		        function.getColumnNumber());
     }
 
     private void checkParameters(LexicalUnitImpl function,
@@ -101,17 +100,4 @@ public class TransparencyModificationFunctionGenerator extends
         return params.get(i).getContainedValue().getFloatValue();
     }
 
-    private int getInteger(ActualArgumentList colorComponents, int i) {
-        return colorComponents.get(i).getContainedValue().getIntegerValue();
-    }
-
-    private LexicalUnitImpl createNumber(LexicalUnitImpl parent, float value) {
-        return LexicalUnitImpl.createNumber(parent.getLineNumber(),
-                parent.getColumnNumber(), value);
-    }
-
-    private LexicalUnitImpl createNumber(LexicalUnitImpl parent, int value) {
-        return LexicalUnitImpl.createNumber(parent.getLineNumber(),
-                parent.getColumnNumber(), value);
-    }
 }

@@ -35,7 +35,12 @@ import com.vaadin.sass.internal.ScssStylesheet;
  */
 public abstract class AbstractResolver implements ScssStylesheetResolver,
         Serializable {
-    /*
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/*
      * (non-Javadoc)
      * 
      * @see
@@ -124,9 +129,8 @@ public abstract class AbstractResolver implements ScssStylesheetResolver,
         String identifierPath = identifier.substring(0, lastSlashPosition);
         if ("".equals(path)) {
             return identifierPath;
-        } else {
-            return path + "/" + identifierPath;
         }
+		return path + "/" + identifierPath;
     }
 
     /**

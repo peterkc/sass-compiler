@@ -27,6 +27,11 @@ import com.vaadin.sass.internal.selector.SimpleSelectorSequence;
  */
 public class Extension implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * The parameter of @extend, e.g. "b" in "a { @extend b; ... }".
      * 
      * This is the selector whose occurrences will be augmented with new entries

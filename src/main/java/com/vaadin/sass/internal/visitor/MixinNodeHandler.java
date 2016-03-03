@@ -22,7 +22,6 @@ import java.util.Collections;
 import com.vaadin.sass.internal.Scope;
 import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.handler.SCSSErrorHandler;
-import com.vaadin.sass.internal.parser.ParseException;
 import com.vaadin.sass.internal.parser.Variable;
 import com.vaadin.sass.internal.tree.MixinDefNode;
 import com.vaadin.sass.internal.tree.MixinNode;

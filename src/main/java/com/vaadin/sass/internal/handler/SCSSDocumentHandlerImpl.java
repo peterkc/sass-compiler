@@ -394,14 +394,6 @@ public class SCSSDocumentHandlerImpl implements SCSSDocumentHandler {
         nodeStack.pop();
     }
 
-    private void log(Object object) {
-        if (object != null) {
-            log(object.toString());
-        } else {
-            log(null);
-        }
-    }
-
     private void log(String msg) {
         Logger.getLogger(SCSSDocumentHandlerImpl.class.getName()).log(
                 Level.INFO, msg);

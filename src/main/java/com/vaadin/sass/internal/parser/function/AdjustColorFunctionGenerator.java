@@ -92,12 +92,11 @@ public class AdjustColorFunctionGenerator extends AbstractFunctionGenerator {
                     .createHslaOrHslColor(ColorUtil.colorToHsl(color), alpha,
                             function.getLineNumber(),
                             function.getColumnNumber());
-        } else {
+        } 
             return ColorUtil
                     .createRgbaOrHexColor(ColorUtil.colorToRgb(color), alpha,
                             function.getLineNumber(),
                             function.getColumnNumber());
-        }
     }
 
     private void scaleHsl(float[] hsl, Float[] adjustBy) {

@@ -30,7 +30,11 @@ import com.vaadin.sass.internal.ScssContext;
  */
 public class SimpleSelectorSequence implements SelectorSegment {
 
-    private List<SimpleSelector> selectors;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<SimpleSelector> selectors;
 
     public SimpleSelectorSequence() {
         selectors = Collections.emptyList();
@@ -177,10 +181,9 @@ public class SimpleSelectorSequence implements SelectorSegment {
 
             return retval;
 
-        } else {
-            // we have a more specific @extend-selector, hence cannot unify
-            return null;
         }
+		// we have a more specific @extend-selector, hence cannot unify
+		return null;
     }
 
     /**
@@ -214,9 +217,8 @@ public class SimpleSelectorSequence implements SelectorSegment {
             // note that the sublist may be backed by the original list
             List<SimpleSelector> tail = selectors.subList(1, selectors.size());
             return new SimpleSelectorSequence(tail);
-        } else {
-            return this;
         }
+		return this;
     }
 
     // optimization - note that the result is backed by selectors of this
@@ -225,9 +227,8 @@ public class SimpleSelectorSequence implements SelectorSegment {
         if (head instanceof TypeSelector) {
             // note that the sublist may be backed by the original list
             return selectors.subList(1, selectors.size());
-        } else {
-            return selectors;
         }
+		return selectors;
     }
 
     /**

@@ -26,7 +26,12 @@ import com.vaadin.sass.internal.ScssContext;
 
 public class ContentNode extends Node {
 
-    public ContentNode() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ContentNode() {
     }
 
     private ContentNode(Node nodeToCopy) {

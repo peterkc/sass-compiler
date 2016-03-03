@@ -29,9 +29,8 @@ public enum BinaryOperator {
         public SassListItem eval(SassListItem leftValue, SassListItem rightValue) {
             if (isTrue(leftValue)) {
                 return leftValue;
-            } else {
+            } 
                 return rightValue;
-            }
         }
     },
     AND(LexicalUnitImpl.SCSS_OPERATOR_AND, 2) {
@@ -39,9 +38,8 @@ public enum BinaryOperator {
         public SassListItem eval(SassListItem leftValue, SassListItem rightValue) {
             if (isTrue(leftValue)) {
                 return rightValue;
-            } else {
+            } 
                 return leftValue;
-            }
         }
     },
     EQUALS(LexicalUnitImpl.SCSS_OPERATOR_EQUALS, 3) {
@@ -105,7 +103,7 @@ public enum BinaryOperator {
                             LexicalUnitImpl.SAC_STRING_VALUE,
                             LexicalUnitImpl.SAC_IDENT)) {
                 return ((LexicalUnitImpl) left).add((LexicalUnitImpl) right);
-            } else {
+            } 
                 String leftValue;
                 if (LexicalUnitImpl.checkLexicalUnitType(left,
                         LexicalUnitImpl.SAC_STRING_VALUE,
@@ -130,12 +128,10 @@ public enum BinaryOperator {
                                 LexicalUnitImpl.SAC_STRING_VALUE)));
                 if (quotedResult) {
                     return LexicalUnitImpl.createString(stringValue);
-                } else {
-                    return LexicalUnitImpl.createIdent(stringValue);
                 }
+                    return LexicalUnitImpl.createIdent(stringValue);
 
             }
-        }
     },
     MINUS(LexicalUnit.SAC_OPERATOR_MINUS, 4) {
         @Override

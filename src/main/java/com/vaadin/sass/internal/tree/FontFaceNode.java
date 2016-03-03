@@ -22,7 +22,12 @@ import com.vaadin.sass.internal.ScssContext;
 
 public class FontFaceNode extends Node {
 
-    public FontFaceNode() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public FontFaceNode() {
     }
 
     private FontFaceNode(FontFaceNode nodeToCopy) {

@@ -22,7 +22,12 @@ import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.parser.Variable;
 
 public class FunctionDefNode extends DefNode {
-    public FunctionDefNode(String name, Collection<Variable> args,
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public FunctionDefNode(String name, Collection<Variable> args,
             boolean hasVariableArgs) {
         super(name, args, hasVariableArgs);
     }

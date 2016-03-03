@@ -26,7 +26,11 @@ import com.vaadin.sass.internal.util.StringUtil;
 
 public class ConsoleMessageNode extends Node implements IVariableNode {
 
-    private String message;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String message;
     private boolean warning;
 
     public ConsoleMessageNode(String message, boolean warning) {

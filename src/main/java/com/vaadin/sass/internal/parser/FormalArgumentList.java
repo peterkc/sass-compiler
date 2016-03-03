@@ -39,8 +39,8 @@ import com.vaadin.sass.internal.ScssContext;
  * 
  */
 public class FormalArgumentList implements Serializable, Iterable<Variable> {
-
-    private ArrayList<Variable> arglist;
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Variable> arglist;
     private String variableArgumentName = null;
 
     public FormalArgumentList(Collection<Variable> args,

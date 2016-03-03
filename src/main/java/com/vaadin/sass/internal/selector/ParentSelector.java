@@ -28,7 +28,11 @@ import com.vaadin.sass.internal.parser.StringInterpolationSequence;
  */
 public class ParentSelector extends TypeSelector {
 
-    public static final ParentSelector it = new ParentSelector();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final ParentSelector it = new ParentSelector();
 
     private ParentSelector() {
         super(new StringInterpolationSequence("&"));

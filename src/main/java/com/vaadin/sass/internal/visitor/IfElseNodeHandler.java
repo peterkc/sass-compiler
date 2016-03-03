@@ -49,9 +49,8 @@ public class IfElseNodeHandler {
                                 .getChildren().size() - 1) {
                     throw new ParseException(
                             "Invalid @if/@else in scss file for " + node);
-                } else {
-                    return traverseChild(context, node.getParentNode(), child);
                 }
+				return traverseChild(context, node.getParentNode(), child);
             }
         }
         // no matching branch
