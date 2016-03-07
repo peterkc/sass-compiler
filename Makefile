@@ -110,11 +110,16 @@ submodules:
 # ----------------------------------------------------------------------------------------------------------------------
 # Test rules
 # ----------------------------------------------------------------------------------------------------------------------
-.PHONY: test-vaadin test-glide test-glide-media
+.PHONY: test-vaadin test-glide test-glide-media test-glide-extend
 
 test-glide: TEST_GROUP ?= com/glide/scss
 test-glide: MAVEN_OPTS += -DtestGroup="com/vaadin"
 test-glide:
+	$(MAVEN) $(MAVEN_OPTS) test
+
+test-glide-extend: MAVEN_OPTS += -DtestGroup="com/glide/scss"
+test-glide-extend: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec/extend-tests"
+test-glide-extend:
 	$(MAVEN) $(MAVEN_OPTS) test
 
 test-glide-media: MAVEN_OPTS += -DtestGroup="com/glide/scss"

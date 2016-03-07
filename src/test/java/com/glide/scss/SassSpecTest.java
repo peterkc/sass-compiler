@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.w3c.css.sac.CSSException;
 
 import com.vaadin.sass.AbstractTestBase;
@@ -31,7 +30,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * @author pete.chanthamynavong
  */
-@RunWith(Arquillian.class)
 public class SassSpecTest extends AbstractTestBase {
 
 	private static final Logger LOGGER = Logger.getLogger( SassSpecTest.class.getName() );
