@@ -76,12 +76,12 @@ public class SCSSErrorHandler implements ErrorHandler {
                 Level.SEVERE, e.getMessage(), e);
     }
 
-    private void severe(String msg) {
+    protected void severe(String msg) {
         Logger.getLogger(SCSSDocumentHandlerImpl.class.getName()).log(
                 Level.SEVERE, msg);
     }
 
-    private void severe(String msg, Exception e) {
+    protected void severe(String msg, Exception e) {
         Logger.getLogger(SCSSDocumentHandlerImpl.class.getName()).log(
                 Level.SEVERE, msg, e);
     }

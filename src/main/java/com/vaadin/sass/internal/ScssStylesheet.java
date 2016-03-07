@@ -18,6 +18,7 @@ package com.vaadin.sass.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -338,7 +339,7 @@ public class ScssStylesheet extends Node {
         this.prefix = prefix;
     }
 
-    private String buildString(BuildStringStrategy strategy) {
+    public String buildString(BuildStringStrategy strategy) {
         StringBuilder string = new StringBuilder("");
         String delimeter = "\n\n";
         // add charset declaration, if it is not default "ASCII".
@@ -366,9 +367,10 @@ public class ScssStylesheet extends Node {
         String logFile = System.getProperty("java.util.logging.config.file");
         if (logFile == null) {
             try {
-                LogManager.getLogManager().readConfiguration(
-                        ScssStylesheet.class
-                                .getResourceAsStream("/logging.properties"));
+            	InputStream is = ScssStylesheet.class.getResourceAsStream("/logging.properties");
+            	LogManager lm = LogManager.getLogManager();
+            	if (is != null)
+            		lm.readConfiguration(is);
             } catch (SecurityException e) {
                 e.printStackTrace();
             } catch (IOException e) {

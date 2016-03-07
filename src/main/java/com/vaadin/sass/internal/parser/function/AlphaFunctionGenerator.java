@@ -50,7 +50,7 @@ public class AlphaFunctionGenerator extends AbstractFunctionGenerator {
     private void checkParameters(LexicalUnitImpl function,
             FormalArgumentList args) {
         LexicalUnitImpl color = (LexicalUnitImpl) getParam(args, "color");
-        if (!(color instanceof LexicalUnitImpl)
+        if (!(color != null)
                 || (!ColorUtil.isColor(color) && !ColorUtil.isRgba(color) && !ColorUtil
                         .isHsla(color))) {
             throw new ParseException("The function "

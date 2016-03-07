@@ -92,12 +92,12 @@ public abstract class AbstractResolver implements ScssStylesheetResolver,
      *            The identifier to be resolved
      * @return a list of paths in which to look for the relative import
      */
-    protected List<String> getPotentialParentPaths(
-            ScssStylesheet parentStylesheet, String identifier) {
+    protected List<String> getPotentialParentPaths(ScssStylesheet parentStylesheet, String identifier) {
         List<String> potentialParents = new ArrayList<String>();
         if (parentStylesheet != null) {
-            potentialParents.add(extractFullPath(
-                    parentStylesheet.getDirectory(), identifier));
+        	String d = parentStylesheet.getDirectory();
+        	String p = extractFullPath(d, identifier);
+            potentialParents.add(p);
         }
 
         // Identifier can be a full path so extract the path part also as a

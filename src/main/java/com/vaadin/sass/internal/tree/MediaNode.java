@@ -67,7 +67,7 @@ public class MediaNode extends Node implements IVariableNode {
         if (media != null) {
             for (int i = 0; i < media.getLength(); i++) {
                 if (i > 0) {
-                    builder.append(", ");
+					//builder.append(", ");
                 }
                 builder.append(media.getSassListItem(i).buildString(strategy));
             }
@@ -103,10 +103,17 @@ public class MediaNode extends Node implements IVariableNode {
 
         MediaListImpl newMedia = new MediaListImpl();
         for (SassListItem sassListItem : media.getSassListItems()) {
-            StringInterpolationSequence interpolationSequence = new StringInterpolationSequence(Collections.singletonList(sassListItem));
-            StringInterpolationSequence replacedSequence = interpolationSequence.replaceVariables(context);
-            newMedia.addAllItems(replacedSequence.getItems());
+			StringInterpolationSequence is = new StringInterpolationSequence(
+					Collections.singletonList(sassListItem));
+			StringInterpolationSequence rs = is.replaceVariables(context);
+			List<SassListItem> sl = rs.getItems();
+			for (SassListItem it : sl) {
+				it = it.replaceVariables(context);
+				newMedia.addItem(it);
         }
+
+			// newMedia.addAllItems(rs.getItems());
+		}
         media = newMedia;
     }
 

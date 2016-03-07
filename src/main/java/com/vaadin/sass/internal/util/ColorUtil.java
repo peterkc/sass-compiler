@@ -534,10 +534,9 @@ public class ColorUtil {
             float alpha, int line, int column) {
         if (alpha < 1.0f) {
             return createHslaColor(hsl[0], hsl[1], hsl[2], alpha, line, column);
-        } else {
+        }
             return createHslFunction(hsl[0], hsl[1], hsl[2], line, column);
         }
-    }
 
     /**
      * Creates a hex color if alpha is equal to one. Otherwise creates an RGBA
@@ -549,10 +548,9 @@ public class ColorUtil {
             int line, int column) {
         if (alpha < 1.0f) {
             return createRgbaColor(rgb[0], rgb[1], rgb[2], alpha, line, column);
-        } else {
+        }
             return createHexColor(rgb, line, column);
         }
-    }
 
     private static LexicalUnitImpl createHslFunction(float hue,
             float saturation, float lightness, int ln, int cn) {

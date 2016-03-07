@@ -33,11 +33,41 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.vaadin.sass.internal.parser.function.*;
 import org.w3c.css.sac.LexicalUnit;
 
 import com.vaadin.sass.internal.ScssContext;
 import com.vaadin.sass.internal.expression.exception.IncompatibleUnitsException;
+import com.vaadin.sass.internal.parser.function.AbsFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.AdjustColorFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.AdjustHueFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.AlphaFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.CallFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.CeilFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.ColorComponentFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.DarkenFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.DefaultFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.FloorFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.GrayscaleFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.IfFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.LightenFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.ListAppendFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.ListIndexFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.ListJoinFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.ListLengthFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.ListNthFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.MinMaxFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.MixFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.PercentageFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.QuoteUnquoteFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.RGBFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.RectFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.RoundFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.SCSSFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.SaturationModificationFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.TransparencyModificationFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.TypeOfFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.UnitFunctionGenerator;
+import com.vaadin.sass.internal.parser.function.UnitlessFunctionGenerator;
 import com.vaadin.sass.internal.tree.FunctionCall;
 import com.vaadin.sass.internal.tree.FunctionDefNode;
 import com.vaadin.sass.internal.tree.Node;
@@ -279,6 +309,10 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         return fname;
     }
 
+    public void setFunctionName(String fname) {
+        this.fname = fname;
+    }
+
     @Override
     public LexicalUnitImpl getParameters() {
         // use getParameterList() instead
@@ -419,7 +453,7 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         return result;
     }
 
-    private void setParameterList(ActualArgumentList params) {
+    public void setParameterList(ActualArgumentList params) {
         this.params = params;
     }
 
@@ -805,7 +839,7 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         return null;
     }
 
-    private static SCSSFunctionGenerator getGenerator(String funcName) {
+    public static SCSSFunctionGenerator getGenerator(String funcName) {
         return SERIALIZERS.get(funcName);
     }
 
@@ -839,6 +873,7 @@ public class LexicalUnitImpl implements LexicalUnit, SCSSLexicalUnit,
         list.add(new UnitFunctionGenerator());
         list.add(new UnitlessFunctionGenerator());
         list.add(new QuoteUnquoteFunctionGenerator());
+        list.add(new CallFunctionGenerator());
         return list;
     }
 
