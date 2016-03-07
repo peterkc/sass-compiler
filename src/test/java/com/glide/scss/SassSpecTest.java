@@ -6,9 +6,12 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -40,10 +43,11 @@ public class SassSpecTest extends AbstractTestBase {
 	@Test
 	public void testSpecs() throws Exception {
 		Path workingDir = Paths.get(System.getProperty("user.dir"));
+		String specPattern = System.getProperty("sass.spec.pattern", "*");
 		Path specPath = Paths.get(System.getProperty("sass.spec.dir", "sass-spec/spec"));
 
 		final List<Path> files = new ArrayList<>();
-		Files.walkFileTree(specPath, new PathSimpleFileVisitor(files));
+		Files.walkFileTree(specPath, new PathSimpleFileVisitor(files, specPath, specPattern));
 
 		int totalSpecs  = 0;
 		int totalPassed = 0;
@@ -56,6 +60,7 @@ public class SassSpecTest extends AbstractTestBase {
 			}
 		}
 
+		LOGGER.info(String.format("directory: %s pattern: %s %n", specPath.toString(), specPattern));
 		LOGGER.info(String.format("%s of %s passed, %s failed %n", totalPassed, totalSpecs, (totalSpecs - totalPassed)));
 		assertThat(totalPassed, equalTo(totalSpecs));
 	}
@@ -75,13 +80,13 @@ public class SassSpecTest extends AbstractTestBase {
 
 		Writer parsedWriter = compress(sheet.printState());
 		parsedScss = parsedWriter.toString();
-//		parsedScss = parsedScss.replaceAll(CR, "");
-//		parsedScss = parsedScss.trim();
+		parsedScss = parsedScss.replaceAll(CR, "");
+		parsedScss = parsedScss.trim();
 
 		Writer comparisonWriter = compress(getFileContent(cssPath));
 		comparisonCss = comparisonWriter.toString();
-//		comparisonCss = comparisonCss.replaceAll(CR, "");
-//		comparisonCss = comparisonCss.trim();
+		comparisonCss = comparisonCss.replaceAll(CR, "");
+		comparisonCss = comparisonCss.trim();
 
 		boolean result = IOUtils.contentEquals(new StringReader(comparisonCss), new StringReader(parsedScss));
 
@@ -122,14 +127,21 @@ public class SassSpecTest extends AbstractTestBase {
 
 	private static class PathSimpleFileVisitor extends SimpleFileVisitor<Path> {
 		private final List<Path> fFiles;
+		private final FileSystem fs = FileSystems.getDefault();
 
-		PathSimpleFileVisitor(List<Path> files) {
+		private final Path fDirectory;
+		private final PathMatcher fMatcher;
+
+		PathSimpleFileVisitor(List<Path> files, Path directory, String pattern) {
 			fFiles = files;
+			fDirectory = directory;
+			fMatcher = fs.getPathMatcher("glob:" + String.format("%s/%s", directory.toString(), pattern));
+			LOGGER.info(String.format("%s/%s", directory.toString(), pattern));
 		}
 
 		@Override
 		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-			if(!attrs.isDirectory()){
+			if (fMatcher.matches(file) && !attrs.isDirectory()) {
 				fFiles.add(file);
 			}
 			return FileVisitResult.CONTINUE;

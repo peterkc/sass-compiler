@@ -74,6 +74,7 @@ MAVEN_OPTS     ?=
 MAVEN_OPTS     += -T 4
 MAVEN_OPTS     += --batch-mode
 MAVEN_OPTS     += --fail-fast
+MAVEN_OPTS     += -Djava.util.logging.config.file=src/main/resources/logging.properties
 #MAVEN_OPTS  += --log-file=logs/maven.log
 
 
@@ -110,7 +111,7 @@ submodules:
 # ----------------------------------------------------------------------------------------------------------------------
 # Test rules
 # ----------------------------------------------------------------------------------------------------------------------
-.PHONY: test-vaadin test-glide test-spec test-spec-extend
+.PHONY: test-vaadin test-glide test-spec test-spec-extend test-spec-media
 
 test-vaadin: TEST_GROUP ?= com/glide/scss
 test-vaadin: MAVEN_OPTS += -DtestGroup="com/vaadin"
@@ -119,7 +120,8 @@ test-vaadin:
 
 
 test-spec: MAVEN_OPTS += -DtestGroup="com/glide/scss"
-test-spec: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec/$(SPEC_DIR)"
+test-spec: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec/"
+test-spec: MAVEN_OPTS += -Dsass.spec.pattern="$(SPEC_DIR)"
 test-spec:
 	$(MAVEN) $(MAVEN_OPTS) test
 
@@ -128,5 +130,8 @@ test-spec-all: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec"
 test-spec-all:
 	$(MAVEN) $(MAVEN_OPTS) test
 
-test-spec-extend: SPEC_DIR := "extend-tests"
+test-spec-extend: SPEC_DIR := "extend-tests/*_test_basic*/*"
 test-spec-extend: test-spec
+
+test-spec-media: SPEC_DIR := "scss/media*/*"
+test-spec-media: test-spec
