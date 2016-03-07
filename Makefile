@@ -71,7 +71,7 @@ JAVA_VERSION := 1.8+
 # ----------------------------------------------------------------------------------------------------------------------
 MAVEN_VERSION  ?= 3.3.9
 MAVEN_OPTS     ?=
-MAVEN_OPTS     += -T 1C
+MAVEN_OPTS     += -T 4
 MAVEN_OPTS     += --batch-mode
 MAVEN_OPTS     += --fail-fast
 #MAVEN_OPTS  += --log-file=logs/maven.log
@@ -110,19 +110,23 @@ submodules:
 # ----------------------------------------------------------------------------------------------------------------------
 # Test rules
 # ----------------------------------------------------------------------------------------------------------------------
-.PHONY: test-vaadin test-glide test-glide-media test-glide-extend
+.PHONY: test-vaadin test-glide test-spec test-spec-extend
 
-test-glide: TEST_GROUP ?= com/glide/scss
-test-glide: MAVEN_OPTS += -DtestGroup="com/vaadin"
-test-glide:
+test-vaadin: TEST_GROUP ?= com/glide/scss
+test-vaadin: MAVEN_OPTS += -DtestGroup="com/vaadin"
+test-vaadin:
 	$(MAVEN) $(MAVEN_OPTS) test
 
-test-glide-extend: MAVEN_OPTS += -DtestGroup="com/glide/scss"
-test-glide-extend: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec/extend-tests"
-test-glide-extend:
+
+test-spec: MAVEN_OPTS += -DtestGroup="com/glide/scss"
+test-spec: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec/$(SPEC_DIR)"
+test-spec:
 	$(MAVEN) $(MAVEN_OPTS) test
 
-test-glide-media: MAVEN_OPTS += -DtestGroup="com/glide/scss"
-test-glide-media: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec/scss/media-with-interpolation"
-test-glide-media:
+test-spec-all: MAVEN_OPTS += -DtestGroup="com/glide/scss"
+test-spec-all: MAVEN_OPTS += -Dsass.spec.dir="sass-spec/spec"
+test-spec-all:
 	$(MAVEN) $(MAVEN_OPTS) test
+
+test-spec-extend: SPEC_DIR := "extend-tests"
+test-spec-extend: test-spec
