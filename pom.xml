@@ -168,7 +168,7 @@
                             </includes>
                             <!--<lookAhead>3</lookAhead>-->
                             <!-- <lookAhead>2</lookAhead> <isStatic>false</isStatic> -->
-                            <!--<outputDirectory>src/main/java</outputDirectory>-->
+                            <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
