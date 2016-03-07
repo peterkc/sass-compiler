@@ -7,6 +7,10 @@ MAVEN_HOME     ?= $(wildcard /usr/local/homebrew/Cellar/maven/3.1.1/libexec)
 
 MAVEN          := $(wildcard $(MAVEN_HOME)/bin/mvn)
 MAVEN          ?= $(call findpath,$(PATH),mvn)
+ifeq (,$(MAVEN))
+MAVEN          := mvn
+endif
+
 MVN            := $(MAVEN)
 
 MAVEN_OPTS     ?=
